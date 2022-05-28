@@ -5,7 +5,7 @@ let holder = document.getElementById("5Day")
 let units = "imperial";
 let newCity = "";
 let timezone = 0;
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 
 // Reach out to API
@@ -27,12 +27,8 @@ function getApiWeather(city, unit) {
 
         console.log("all data")  
         console.log(data)
-        let rightNow = data.list[0]
-        console.log("got element")
-        console.log(rightNow)
         let cityInfo = data.city;
         timezone = cityInfo.timezone;
-        console.log("timezone: "+timezone)
 
         holder.innerHTML = ""
         for (let i = 0; i < 40; i+=8) {
@@ -41,7 +37,7 @@ function getApiWeather(city, unit) {
         
       });
   }
-getApiWeather("longmont", true)
+getApiWeather("Longmont",true)
 
 let getCity = () => {
     let input = document.getElementById("newCity");
@@ -70,13 +66,12 @@ let buildCard = (data) => {
     let humidity = document.createElement("p")
     let desc = document.createElement("p")
     // card
-    card.setAttribute("class","card-panel teal")
+    card.setAttribute("class","col card s2.2 card-panel teal")
     // get & set info
     console.log(data)
         //Date
         let dateVar = (data.dt)*1000;
         let currDate = new Date(dateVar);
-        console.log("currDate: "+currDate+" var passed: "+ data.dt*1000)
         let date_format = currDate.toLocaleString('en-US', options)
         date.textContent =`${date_format}`;
         // icon
@@ -91,7 +86,7 @@ let buildCard = (data) => {
         let windVar = data.wind;
         let currWindSpeed = Math.round(windVar.speed);
         let currWindDir = windDirection(windVar.deg);
-        wind.textContent = `Wind: ${currWindSpeed} in ${currWindDir} direction`;
+        wind.textContent = `Wind: ${currWindSpeed} by ${currWindDir}`;
         //humidity
         let humidVar = Math.round(main.humidity);
         humidity.textContent = `Humidity: ${humidVar}%`;;
