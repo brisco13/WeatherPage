@@ -29,17 +29,22 @@
                 </label>
             </div>
             <br>
-
-
+            <!-- Search Button -->
             <button class="btn waves-effect waves-light" type="submit" name="action" onclick="getCity()">Search
                 <i class="material-icons right">send</i>
               </button>
+            <!-- prior searches -->
         </div>
   
         <div class="col s12 m8 l9"> 
-            <ul id="5Day">
+            <!-- current weather -->
+            <div id="current">
 
-            </ul>
+            </div>
+            <!-- 5day forecast -->
+            <div id="5Day" class="row s12 m5">
+
+            </div>
         </div>
   
     </div>
@@ -49,9 +54,13 @@
     <div></div>
 
     <!-- area for 5 day forecast -->
-    <div></div>
+    <div id="holder" class="row">
 
-    <script src="./assets/js/script.js"></script>
+    </div>
+
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
