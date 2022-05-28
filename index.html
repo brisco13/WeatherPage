@@ -6,13 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <!-- banner -->
     <div></div>
 
     <!-- search bar/previous searches aside -->
-    <div></div>
+    
+
+    <div class="row">
+
+        <div class="col s12 m4 l3"> 
+            <input id="newCity" type="text" placeholder="Type City Here">
+              <!-- Switch -->
+            <div class="switch">
+                <label>
+                Imperial
+                <input id="unit" type="checkbox" onclick="result()">
+                <span class="lever"></span>
+                Metric
+                </label>
+            </div>
+            <br>
+
+
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="getCity()">Search
+                <i class="material-icons right">send</i>
+              </button>
+        </div>
+  
+        <div class="col s12 m8 l9"> 
+            <ul id="5Day">
+
+            </ul>
+        </div>
+  
+    </div>
+    
 
     <!-- main body with weather report -->
     <div></div>
