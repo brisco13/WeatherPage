@@ -3,5 +3,19 @@
 }
 
 h3 {
+    font-size: 220%;
+}
+
+h4 {
     font-size: 130%;
+}
+
+#5day {
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    /* padding:0%; */
+    margin:0%;
 }

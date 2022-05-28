@@ -6,6 +6,9 @@ let units = "imperial";
 let newCity = "";
 let timezone = 0;
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const Timeoptions = { hour: 'numeric', minute: 'numeric'};
+let currentHolder = document.getElementById("current");
+let cityInfo = "";
 
 
 // Reach out to API
@@ -27,14 +30,19 @@ function getApiWeather(city, unit) {
 
         console.log("all data")  
         console.log(data)
-        let cityInfo = data.city;
+        cityInfo = data.city;
         timezone = cityInfo.timezone;
 
+        currentHolder.innerHTML = ""
         holder.innerHTML = ""
         for (let i = 0; i < 40; i+=8) {
+            if (i === 0) {
+                buildMain(data.list[i])
+                buildCard(data.list[i])
+            } else {
             buildCard(data.list[i])
+            }
         }
-        
       });
   }
 getApiWeather("Longmont",true)
@@ -43,6 +51,10 @@ let getCity = () => {
     let input = document.getElementById("newCity");
     let unit_metric = document.getElementById("unit").checked
     newCity = input.value;
+    if (newCity === ""){
+        window.alert("Please enter a city and try again")
+        return
+        }
     getApiWeather(newCity, unit_metric)
     //getApiForecast(newCity, unit_metric)
     console.log(unit_metric)
@@ -50,23 +62,21 @@ let getCity = () => {
 }
 
 let result = () => {
-    let unit_metric = document.getElementById("unit").checked
-    console.log("checked: "+unit_metric)
+    let unit_metric = document.getElementById("unit").checked;
 }
 
-// function to build a card
+// function to build forecast cards
 let buildCard = (data) => {
-    
     //create elements
     let card = document.createElement("div")
-    let date = document.createElement("h3")
-    let icon = document.createElement("div")
+    let date = document.createElement("h4")
+    let icon = document.createElement("img")
     let temp = document.createElement("p")
     let wind = document.createElement("p")
     let humidity = document.createElement("p")
     let desc = document.createElement("p")
     // card
-    card.setAttribute("class","col card s2.2 card-panel teal")
+    card.setAttribute("class","col card s2 card-panel blue lighten-4 center-align")
     // get & set info
     console.log(data)
         //Date
@@ -77,7 +87,7 @@ let buildCard = (data) => {
         // icon
         let weatherInfo = data.weather[0];
         let currIcon = weatherInfo.icon;
-        //icon = ???
+        icon.setAttribute("src",`http://openweathermap.org/img/w/${currIcon}.png`)
         //temp
         let main = data.main;
         let currTemp = Math.round(main.temp);
@@ -104,6 +114,69 @@ let buildCard = (data) => {
     holder.append(card)
 }
 
+
+//Current Main Card
+let buildMain = (data) => {
+        //create elements
+        let card = document.createElement("div")
+        let cityName = document.createElement("h2")
+        let sunrise = document.createElement("p")
+        let sunset = document.createElement("p")
+        let date = document.createElement("h3")
+        let icon = document.createElement("img")
+        let temp = document.createElement("p")
+        let wind = document.createElement("p")
+        let humidity = document.createElement("p")
+        let desc = document.createElement("p")
+        // card
+        card.setAttribute("class","main card-panel blue lighten-4")
+        // get & set info
+            // City info
+            let city_Name = cityInfo.name;
+            let sunriseTime = new Date(cityInfo.sunrise*1000);
+            let sunsetTime = new Date(cityInfo.sunset*1000);
+            let sunset_format = sunsetTime.toLocaleString('en-US', Timeoptions);
+            let sunrise_format = sunriseTime.toLocaleString('en-US', Timeoptions);
+            sunrise.textContent =`Sunrise: ${sunrise_format}`;
+            sunset.textContent =`Sunset: ${sunset_format}`;
+            cityName.textContent =`${city_Name}`;
+            //Date
+            let dateVar = (data.dt)*1000;
+            let currDate = new Date(dateVar);
+            let date_format = currDate.toLocaleString('en-US', options)
+            date.textContent =`${date_format}`;
+            // icon
+            let weatherInfo = data.weather[0];
+            let currIcon = weatherInfo.icon;
+            icon.setAttribute("src",`http://openweathermap.org/img/w/${currIcon}.png`)
+            //temp
+            let main = data.main;
+            let currTemp = Math.round(main.temp);
+            temp.textContent = `Temperature: ${currTemp}`;
+            //temp
+            let windVar = data.wind;
+            let currWindSpeed = Math.round(windVar.speed);
+            let currWindDir = windDirection(windVar.deg);
+            wind.textContent = `Wind: ${currWindSpeed} by ${currWindDir}`;
+            //humidity
+            let humidVar = Math.round(main.humidity);
+            humidity.textContent = `Humidity: ${humidVar}%`;;
+            //description 
+            let currDesc = weatherInfo.main;
+            desc.textContent = currDesc;
+        // add to card
+        card.append(cityName)
+        card.append(sunrise)
+        card.append(sunset)
+        card.append(date)
+        card.append(icon)
+        card.append(desc)
+        card.append(temp)
+        card.append(wind)
+        card.append(humidity)
+    
+        currentHolder.append(card)
+}
 
 // OnClick place query
 
