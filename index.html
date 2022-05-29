@@ -11,9 +11,13 @@
 </head>
 <body>
     <!-- banner -->
-    <div></div>
-
-    <!-- search bar/previous searches aside -->
+    <div class="row">
+        <div class="col s12 m12 l12">
+          <div class="card-panel blue lighten-4 center-align">
+            <h1>Weather Dashboard</h1>
+          </div>
+        </div>
+      </div>
     
 
     <div class="row">
@@ -24,7 +28,7 @@
             <div class="switch">
                 <label>
                 Imperial
-                <input id="unit" type="checkbox" onclick="result()">
+                <input id="unit" type="checkbox">
                 <span class="lever"></span>
                 Metric
                 </label>
@@ -35,6 +39,9 @@
                 <i class="material-icons right">send</i>
               </button>
             <!-- prior searches -->
+            <div id="pastSearches">
+
+            </div>
         </div>
   
         <div class="col s12 m8 l10"> 

@@ -1,13 +1,29 @@
 .card {
-    margin: 1%;
+    width: 18%;
+    margin: 0.5%;
+    align-content: center;
+
 }
 
 h3 {
-    font-size: 220%;
+    font-size: 150%;
+}
+
+.main img {
+    width: 8%;
+}
+
+.card img {
+    width: 50%;
 }
 
 h4 {
     font-size: 130%;
+    
+}
+
+h1 {
+    font-size: 400%;
 }
 
 #5day {
@@ -16,6 +32,11 @@ h4 {
 }
 
 .main {
-    /* padding:0%; */
-    margin:0%;
+    margin: 0.5%;
 }
+
+.main p, h3,img {
+    font-size: 120%;
+    margin: 0.1%;
+}
+
