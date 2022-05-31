@@ -12,14 +12,8 @@ let initial = true;
 let units_symbol = "°F"
 let UV_var = "";
 
-//demo call
-//getApiWeather("Longmont",true)
-
-
-
 // Reach out to API
 function getApiWeather(city, unit) {
-    // replace `octocat` with anyone else's GitHub username
     if (unit === true) {
         units = "metric";
         units_symbol = "°C"
@@ -37,9 +31,6 @@ function getApiWeather(city, unit) {
       })
       .then(function (data) {
 
-
-        console.log("all data")  
-        console.log(data)
         cityInfo = data.city;
         let cityCoor =  cityInfo.coord
         cityLat = cityCoor.lat
@@ -66,11 +57,9 @@ function getApiWeather(city, unit) {
             buildCard(data.list[i])
             }
         }
-
     })
       });
   }
-
 
 let getCity = () => {
     let input = document.getElementById("newCity");
@@ -97,7 +86,6 @@ let buildCard = (data) => {
     // card
     card.setAttribute("class","col card card-panel blue lighten-4 center-align")
     // get & set info
-    console.log(data)
         //Date
         let dateVar = (data.dt)*1000;
         let currDate = new Date(dateVar);
@@ -169,7 +157,6 @@ let buildMain = (data) => {
             let currUV = Math.round(UV_var);
             let UVcol = UVcolor(currUV)
             UV.textContent = `UV: ${currUV}`;
-            //UV.setAttribute("style",`background-color: ${UVcol} font-weight:bold `)
             //wind
             let windVar = data.wind;
             let currWindSpeed = Math.round(windVar.speed*2.23694);
@@ -194,27 +181,17 @@ let buildMain = (data) => {
         card.append(humidity)
         currentHolder.append(card)
 }
-
-// OnClick place query
-
 // generate card for previous search and place below search bar
 let makeSearchCard = (city) => {
     searchHolder.innerHTML=""
     let index = pastCities.indexOf(city);
-    console.log(index)
-    console.log(city)
     if (city !== undefined) {
         if (index>=0) {
             let tempVar = pastCities[index];
-            console.log("tempVar: "+tempVar)
-            console.log("PastCities: "+pastCities)
             pastCities.splice(index,1)
             pastCities.unshift(tempVar)
-            console.log("PastCities: "+pastCities)
-        } else {pastCities.unshift(city)}
-        
-    } 
-    
+        } else {pastCities.unshift(city)}    
+    }  
     if (pastCities.length>=6) {
         pastCities.pop();
     } 
@@ -233,15 +210,9 @@ let makeSearchCard = (city) => {
         card.append(p)
         searchHolder.append(card)
     });
-
     localStorage.setItem("pastCities", JSON.stringify(pastCities))
-
     }
-// get 5 days of weather info 
-
-// make main section for today's weather
-
-// Local strage
+// Local storage
 function checkCities() {
     if (localStorage.getItem("hasCities") != null) {
         pastCities = JSON.parse(localStorage.getItem("pastCities"));
@@ -253,14 +224,11 @@ function checkCities() {
         makeSearchCard();
     }    
 }
-
-
 function checkCityContents() {
     pastCities.forEach(element => {
         makeSearchCard(element)
     });
 }
-
 // wind direction
 let windDirection = (num) => {
     let windArr = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
@@ -268,7 +236,6 @@ let windDirection = (num) => {
         {return windArr[0];}
     return windArr[Math.round(num/22.5)]
 }
-
 // UV color
 let UVcolor = (num) => {
     if (num<=2) {return "green";}
@@ -277,5 +244,4 @@ let UVcolor = (num) => {
     if (num<=8) {return "lightcoral";}
     if (num>8) {return "red";}
 }
-
 checkCities()

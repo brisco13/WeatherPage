@@ -10,7 +10,7 @@ h3 {
 }
 
 .main img {
-    width: 8%;
+    width: 6%;
 }
 
 .card img {
@@ -22,8 +22,12 @@ h4 {
     
 }
 
+h2 {
+    font-size: 270%;
+}
+
 h1 {
-    font-size: 400%;
+    font-size: 300%;
 }
 
 #5day {
@@ -40,3 +44,20 @@ h1 {
     margin: 0.1%;
 }
 
+.totalSearch {
+    background-color: rgb(233, 232, 232);
+    border: darkgray solid 1px;
+}
+
+label {
+    color:black;
+}
+
+.jumbo {
+    padding-top: 0.002%;
+    padding-bottom: 0.2%;
+}
+
+::placeholder{
+    color: darkgray;
+}
